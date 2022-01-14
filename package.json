@@ -1,0 +1,14 @@
+{
+  "name": "g6502",
+  "version": "0.1.0",
+  "description": "6502 Emulation",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gareth Williams",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
