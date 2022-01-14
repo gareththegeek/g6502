@@ -6,7 +6,7 @@ import { build6502State } from '../../helpers/factories'
 
 describe('Unit', () => {
     describe('6502', () => {
-        describe('irqCommand', () => {
+        describe('irq', () => {
             let buildIrqEvent: jest.SpyInstance
 
             beforeEach(() => {

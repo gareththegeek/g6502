@@ -1,3 +1,6 @@
 export { Bus } from './Bus'
 export { Event } from './Event'
 export { Store } from './Store'
+export { Range } from './Range'
+export { Component } from './Component'
+export { RangedComponent } from './RangedComponent'

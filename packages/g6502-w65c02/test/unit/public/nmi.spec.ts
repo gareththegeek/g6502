@@ -5,7 +5,7 @@ import State from '../../../src/State'
 
 describe('Unit', () => {
     describe('6502', () => {
-        describe('nmiCommand', () => {
+        describe('nmi', () => {
             let buildNmiEvent: jest.SpyInstance
 
             beforeEach(() => {

@@ -1,10 +1,6 @@
 import State from '../../src/State'
 import { Store } from 'g6502-interfaces'
 
-export const buildPubSub = () => ({
-    publishSync: jest.fn()
-})
-
 export const build6502State = (): State => ({
     pc: 1,
     a: 2,
@@ -33,5 +29,5 @@ export const buildBus = () => ({
 
 export const buildStore = (): Store<State> => ({
     read: jest.fn<State, []>(),
-    write: jest.fn<void, [State]>()
+    write: jest.fn<void, [Event]>()
 })

@@ -10,7 +10,7 @@ import { build6502State, buildBus, buildStore } from '../../helpers/factories'
 
 describe('Unit', () => {
     describe('6502', () => {
-        describe('clockCommand', () => {
+        describe('clock', () => {
             let bus: Bus
             let store: Store
             let buildWaitCycleEvent: jest.SpyInstance

@@ -5,7 +5,7 @@ import State from '../../../src/State'
 
 describe('Unit', () => {
     describe('6502', () => {
-        describe('stateQuery', () => {
+        describe('state', () => {
             it('should return contents of Store', () => {
                 const expected = build6502State()
                 const store = {

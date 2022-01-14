@@ -5,7 +5,7 @@ import State from '../../../src/State'
 
 describe('Unit', () => {
     describe('6502', () => {
-        describe('resetCommand', () => {
+        describe('reset', () => {
             let buildResetEvent: jest.SpyInstance
 
             beforeEach(() => {

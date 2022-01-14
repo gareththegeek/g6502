@@ -1,4 +1,6 @@
-export interface Bus {
-    read: (address: number) => number
-    write: (address: number, value: number) => void
+import { RangedComponent } from './RangedComponent'
+import { Component } from './Component'
+
+export interface Bus extends Component {
+    attachComponentCommand: (rangedComponent: RangedComponent) => void
 }
