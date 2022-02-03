@@ -27,7 +27,7 @@ describe('Unit', () => {
             it('should read the initial value for the pc from addresses 0xfffc and 0fffd on the bus', () => {
                 const expected = 0x1234
                 const bus = buildBus()
-                bus.read.mockImplementation((address: number): number => {
+                ;(bus.read as jest.Mock).mockImplementation((address: number): number => {
                     switch (address) {
                         case 0xfffc:
                             return 0x34

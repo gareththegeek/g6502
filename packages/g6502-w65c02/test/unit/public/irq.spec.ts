@@ -28,7 +28,7 @@ describe('Unit', () => {
 
                 const state = build6502State()
                 state.status.irqDisable = false
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const uut = irq
                 uut(store)
@@ -44,7 +44,7 @@ describe('Unit', () => {
 
                 const state = build6502State()
                 state.status.irqDisable = true
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const uut = irq
                 uut(store)

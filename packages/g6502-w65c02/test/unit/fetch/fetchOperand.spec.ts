@@ -9,7 +9,7 @@ describe('Unit', () => {
                 const size = 4
                 const expected = [7, 8, 9, 10]
                 const bus = buildBus()
-                bus.read.mockImplementation((a: number): number => expected[a - address] as number)
+                ;(bus.read as jest.Mock).mockImplementation((a: number): number => expected[a - address] as number)
 
                 const uut = fetchOperand
                 const actual = uut(bus, address, size)

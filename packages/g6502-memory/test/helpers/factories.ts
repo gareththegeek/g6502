@@ -1,14 +1,11 @@
-import State from '../../src/domain/State'
-import { SinonStubbedInstance } from 'sinon'
-import sinon = require('sinon')
-import { Store } from 'gemu-interfaces'
+import State from '../../src/State'
+import { Store } from 'g6502-interfaces'
 
 export const buildState = (): State => ({
     pages: []
 })
 
-export const buildStore = (): SinonStubbedInstance<Store<State>> => ({
-    read: sinon.stub(),
-    write: sinon.stub(),
-    overwrite: sinon.stub()
+export const buildStore = (): Store<State> => ({
+    read: jest.fn(),
+    write: jest.fn()
 })

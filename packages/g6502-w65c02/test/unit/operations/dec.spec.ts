@@ -9,7 +9,7 @@ describe('Unit', () => {
                 const bus = buildBus()
                 const address = 0x1234
                 const expected = 0x31
-                bus.read.mockReturnValue(expected + 1)
+                ;(bus.read as jest.Mock).mockReturnValue(expected + 1)
 
                 testOperation(dec, {}, {}, address, bus)
 
@@ -21,7 +21,7 @@ describe('Unit', () => {
                 const bus = buildBus()
                 const address = 0x1234
                 const expected = 0xff
-                bus.read.mockReturnValue(0x0)
+                ;(bus.read as jest.Mock).mockReturnValue(0x0)
 
                 testOperation(dec, {}, {}, address, bus)
 
@@ -31,7 +31,7 @@ describe('Unit', () => {
             it('should set zero flag if decremented value is zero', () => {
                 const bus = buildBus()
                 const address = 0x1234
-                bus.read.mockReturnValue(0x01)
+                ;(bus.read as jest.Mock).mockReturnValue(0x01)
 
                 const actual = testOperation(dec, {}, { zero: false }, address, bus)
 
@@ -42,7 +42,7 @@ describe('Unit', () => {
             it('should clear zero and negative flags if decremented value is positive', () => {
                 const bus = buildBus()
                 const address = 0x1234
-                bus.read.mockReturnValue(0x10)
+                ;(bus.read as jest.Mock).mockReturnValue(0x10)
 
                 const actual = testOperation(dec, {}, { zero: true, negative: true }, address, bus)
 
@@ -54,7 +54,7 @@ describe('Unit', () => {
             it('should set negative flag if decremented value is negative', () => {
                 const bus = buildBus()
                 const address = 0x1234
-                bus.read.mockReturnValue(0xf6)
+                ;(bus.read as jest.Mock).mockReturnValue(0xf6)
 
                 const actual = testOperation(dec, {}, { negative: false }, address, bus)
 

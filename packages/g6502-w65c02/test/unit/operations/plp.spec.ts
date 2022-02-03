@@ -53,7 +53,7 @@ describe('Unit', () => {
             ].forEach((item) => {
                 it('should load data at stack pointer into status register and increment stack pointer', () => {
                     const bus = buildBus()
-                    bus.read.mockReturnValue(item.status)
+                    ;(bus.read as jest.Mock).mockReturnValue(item.status)
 
                     const actual = testOperation(plp, { sp: 0x87 }, {}, 0x00, bus)
 

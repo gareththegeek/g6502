@@ -13,7 +13,7 @@ describe('Unit', () => {
                     write: jest.fn()
                 } as Store<State>
 
-                store.read.mockReturnValue(expected)
+                ;(store.read as jest.Mock).mockReturnValue(expected)
 
                 const uut = getState
                 const actual = uut(store)

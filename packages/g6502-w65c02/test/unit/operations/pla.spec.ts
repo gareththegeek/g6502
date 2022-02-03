@@ -7,7 +7,7 @@ describe('Unit', () => {
         describe('pla', () => {
             it('should load data at stack pointer into accumulator, increment stack pointer and set negative and zero flags', () => {
                 const bus = buildBus()
-                bus.read.mockReturnValue(0x93)
+                ;(bus.read as jest.Mock).mockReturnValue(0x93)
 
                 const actual = testOperation(pla, { a: 0x54, sp: 0x87 }, { zero: true, negative: false }, 0x00, bus)
 

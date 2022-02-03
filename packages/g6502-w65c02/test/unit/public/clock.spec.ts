@@ -7,12 +7,13 @@ import * as buildOperationEventUnit from '../../../src/events/buildOperationEven
 import { Store } from 'g6502-interfaces'
 import { Bus } from 'g6502-interfaces'
 import { build6502State, buildBus, buildStore } from '../../helpers/factories'
+import State from '../../../src/State'
 
 describe('Unit', () => {
     describe('6502', () => {
         describe('clock', () => {
             let bus: Bus
-            let store: Store
+            let store: Store<State>
             let buildWaitCycleEvent: jest.SpyInstance
             let buildInitialiseEvent: jest.SpyInstance
             let buildNmiInterruptEvent: jest.SpyInstance
@@ -39,7 +40,7 @@ describe('Unit', () => {
                 state.initialised = false
                 state.nmi = true
                 state.irq = true
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const expected = { foo: 'bar' }
                 buildWaitCycleEvent.mockReturnValue(expected)
@@ -61,7 +62,7 @@ describe('Unit', () => {
                 state.initialised = false
                 state.nmi = true
                 state.irq = true
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const expected = { foo: 'bar' }
                 buildInitialiseEvent.mockReturnValue(expected)
@@ -83,7 +84,7 @@ describe('Unit', () => {
                 state.initialised = true
                 state.nmi = true
                 state.irq = true
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const expected = { foo: 'bar' }
                 buildNmiInterruptEvent.mockReturnValue(expected)
@@ -105,7 +106,7 @@ describe('Unit', () => {
                 state.initialised = true
                 state.nmi = false
                 state.irq = true
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const expected = { foo: 'bar' }
                 buildIrqInterruptEvent.mockReturnValue(expected)
@@ -127,7 +128,7 @@ describe('Unit', () => {
                 state.initialised = true
                 state.nmi = false
                 state.irq = false
-                store.read.mockReturnValue(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 const expected = { foo: 'bar' }
                 buildOperationEvent.mockReturnValue(expected)

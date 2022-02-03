@@ -1,9 +1,5 @@
-import * as chai from 'chai'
-import * as sinonChai from 'sinon-chai'
-import { buildState } from '../../../helpers/factories'
-import { readFromMemory } from '../../../../src/domain/addressing/readFromMemory'
-chai.use(sinonChai)
-const expect = chai.expect
+import { buildState } from '../../helpers/factories'
+import { readFromMemory } from '../../../src/addressing/readFromMemory'
 
 describe('Memory', () => {
     describe('Unit', () => {
@@ -17,7 +13,7 @@ describe('Memory', () => {
 
                 const actual = readFromMemory(state, address)
 
-                expect(actual).to.be.equal(expected)
+                expect(actual).toEqual(expected)
             })
 
             it('should return zero if read outside of address range', () => {
@@ -29,7 +25,7 @@ describe('Memory', () => {
 
                 const actual = readFromMemory(state, address)
 
-                expect(actual).to.be.equal(expected)
+                expect(actual).toEqual(expected)
             })
 
             it('should use correct page index and offset when accessing memory', () => {
@@ -41,7 +37,7 @@ describe('Memory', () => {
 
                 const actual = readFromMemory(state, address)
 
-                expect(actual).to.be.equal(expected)
+                expect(actual).toEqual(expected)
             })
         })
     })

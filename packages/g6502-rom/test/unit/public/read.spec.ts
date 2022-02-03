@@ -1,27 +1,23 @@
-import * as chai from 'chai'
-import * as sinonChai from 'sinon-chai'
-import { buildStore, buildState } from '../../../helpers/factories'
-import { readQuery } from '../../../../src/application/queries/readQuery'
-chai.use(sinonChai)
-const expect = chai.expect
+import { buildStore, buildState } from '../../helpers/factories'
+import { read } from '../../../src/public/read'
 
 describe('Rom', () => {
     describe('Unit', () => {
-        describe('readQuery', () => {
+        describe('read', () => {
             it('should return value at specified address in state', () => {
                 const address = 3
                 const expected = 6
 
                 const store = buildStore()
                 const state = buildState()
-                store.read.returns(state)
+                ; (store.read as jest.Mock).mockReturnValue(state)
 
                 state.data = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
-                const uut = readQuery(store)
-                const actual = uut(address)
+                const uut = read
+                const actual = uut(store, address)
 
-                expect(actual).to.be.equal(expected)
+                expect(actual).toEqual(expected)
             })
 
             it('should return zero if read outside of address range', () => {
@@ -30,14 +26,14 @@ describe('Rom', () => {
 
                 const store = buildStore()
                 const state = buildState()
-                store.read.returns(state)
+                ;(store.read as jest.Mock).mockReturnValue(state)
 
                 state.data = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
-                const uut = readQuery(store)
-                const actual = uut(address)
+                const uut = read
+                const actual = uut(store, address)
 
-                expect(actual).to.be.equal(expected)
+                expect(actual).toEqual(expected)
             })
         })
     })

@@ -1,9 +1,5 @@
-import * as chai from 'chai'
-import * as sinonChai from 'sinon-chai'
-import { buildWriteState } from '../../../../src/domain/events/buildWriteState'
-import { PAGE_SIZE } from '../../../../src/domain/constants'
-chai.use(sinonChai)
-const expect = chai.expect
+import { buildWriteState } from '../../../src/events/buildWriteState'
+import { PAGE_SIZE } from '../../../src/constants'
 
 describe('Memory', () => {
     describe('Unit', () => {
@@ -18,7 +14,7 @@ describe('Memory', () => {
                 }
                 const actual = buildWriteState(state, address, expected)
 
-                expect(actual.pages[0].data[2]).to.be.equal(expected)
+                expect(actual.pages[0].data[2]).toEqual(expected)
             })
 
             it('should not modify other addresses in memory', () => {
@@ -33,9 +29,9 @@ describe('Memory', () => {
                 }
                 const actual = buildWriteState(state, address, value)
 
-                expect(actual.pages.length).to.be.equal(2)
-                expect(actual.pages[0].data).to.be.deep.equal([1, 2, 3, 4])
-                expect(actual.pages[1].data).to.be.deep.equal([5, 6, 7, 8])
+                expect(actual.pages.length).toEqual(2)
+                expect(actual.pages[0].data).toEqual([1, 2, 3, 4])
+                expect(actual.pages[1].data).toEqual([5, 6, 7, 8])
             })
 
             it('should resolve address to correct page index and offset', () => {
@@ -50,7 +46,7 @@ describe('Memory', () => {
                 }
                 const actual = buildWriteState(state, address, expected)
 
-                expect(actual.pages[1].data[1]).to.be.equal(expected)
+                expect(actual.pages[1].data[1]).toEqual(expected)
             })
         })
     })

@@ -10,7 +10,7 @@ describe('Unit', () => {
                 const pc = 0xbeef + 1
 
                 const bus = buildBus()
-                bus.read.mockImplementation((address: number): number => {
+                ;(bus.read as jest.Mock).mockImplementation((address: number): number => {
                     switch (address) {
                         case 0x0182:
                             return 0xef

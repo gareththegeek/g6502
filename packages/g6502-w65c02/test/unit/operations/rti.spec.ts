@@ -11,7 +11,7 @@ describe('Unit', () => {
                 const status = 0xff
 
                 const bus = buildBus()
-                bus.read.mockImplementation((address: number): number => {
+                ;(bus.read as jest.Mock).mockImplementation((address: number): number => {
                     switch (address) {
                         case 0x0181:
                             return status

@@ -22,14 +22,15 @@ describe('Unit', () => {
                 const uut = buildInterruptEvent
                 const actual = uut(previous, bus, 0x8765, 0x30)
 
-                expect(bus.write.mock.calls[0]![0]).toEqual(0x01ff)
-                expect(bus.write.mock.calls[0]![1]).toEqual(0x12)
+                const write = bus.write as jest.Mock
+                expect(write.mock.calls[0]![0]).toEqual(0x01ff)
+                expect(write.mock.calls[0]![1]).toEqual(0x12)
 
-                expect(bus.write.mock.calls[1]![0]).toEqual(0x01fe)
-                expect(bus.write.mock.calls[1]![1]).toEqual(0x34)
+                expect(write.mock.calls[1]![0]).toEqual(0x01fe)
+                expect(write.mock.calls[1]![1]).toEqual(0x34)
 
-                expect(bus.write.mock.calls[2]![0]).toEqual(0x01fd)
-                expect(bus.write.mock.calls[2]![1]).toEqual(0xba)
+                expect(write.mock.calls[2]![0]).toEqual(0x01fd)
+                expect(write.mock.calls[2]![1]).toEqual(0xba)
 
                 expect(actual.sp).toBe(0xfc)
             })
@@ -37,7 +38,7 @@ describe('Unit', () => {
             it('should set the program counter to the addressed stored by the specified vector', () => {
                 const vector = 0x4545
                 const bus = buildBus()
-                bus.read.mockImplementation((address: number): number => {
+                ;(bus.read as jest.Mock).mockImplementation((address: number): number => {
                         switch (address) {
                             case vector + 0:
                                 return 0x65

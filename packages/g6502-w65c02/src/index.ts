@@ -9,7 +9,7 @@ import reset from './public/reset'
 
 export const build6502 = (bus: Bus) => {
     let state: State = {} as State
-    const store: Store = {
+    const store: Store<State> = {
         read: () => state,
         write: (event: Event<State>) => ({
             ...state,

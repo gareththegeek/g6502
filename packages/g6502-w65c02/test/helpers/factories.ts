@@ -1,5 +1,5 @@
 import State from '../../src/State'
-import { Store } from 'g6502-interfaces'
+import { Store, Event, Bus } from 'g6502-interfaces'
 
 export const build6502State = (): State => ({
     pc: 1,
@@ -22,12 +22,13 @@ export const build6502State = (): State => ({
     cycles: 7
 })
 
-export const buildBus = () => ({
+export const buildBus = (): Bus => ({
     read: jest.fn<number, [number]>(),
-    write: jest.fn<void, [number, number]>()
+    write: jest.fn<void, [number, number]>(),
+    attachComponentCommand: jest.fn()
 })
 
 export const buildStore = (): Store<State> => ({
     read: jest.fn<State, []>(),
-    write: jest.fn<void, [Event]>()
+    write: jest.fn<void, [Event<State>]>()
 })

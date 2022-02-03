@@ -27,7 +27,7 @@ describe('Unit', () => {
 
                 const expectedAddress = 0x123
                 const bus = buildBus()
-                bus.read.mockReturnValue(expected.opcode)
+                ;(bus.read as jest.Mock).mockReturnValue(expected.opcode)
 
                 const uut = fetchInstruction
                 const actual = uut(bus, expectedAddress)
@@ -47,7 +47,7 @@ describe('Unit', () => {
 
                 const expectedAddress = 0x123
                 const bus = buildBus()
-                bus.read.mockReturnValue(expected.opcode + 1)
+                ;(bus.read as jest.Mock).mockReturnValue(expected.opcode + 1)
 
                 const uut = fetchInstruction
                 const actual = uut(bus, expectedAddress)

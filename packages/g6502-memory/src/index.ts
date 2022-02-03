@@ -1,6 +1,25 @@
-import Memory, { buildMemory } from './application/Memory'
-import IndexOffset from './domain/IndexOffset'
-import Page from './domain/Page'
-import State from './domain/State'
+import Memory from './Memory'
+import State from './State'
+import { Event, Store } from 'g6502-interfaces'
+import { buildDefaultStateEvent } from './events/buildDefaultStateEvent'
+import { read } from './public/read'
+import { write } from './public/write'
 
-export { Memory, buildMemory, IndexOffset, Page, State }
+export const buildMemory = (pageCount: number): Memory => {
+    let state: State = {} as State
+    const store: Store<State> = {
+        read: () => state,
+        write: (event: Event<State>) => ({
+            ...state,
+            ...event
+        })
+    }
+    store.write(buildDefaultStateEvent(pageCount))
+
+    return {
+        read: (address: number) => read(store, address),
+        write: (address: number, value: number) => {
+            write(store, address, value)
+        }
+    }
+}
